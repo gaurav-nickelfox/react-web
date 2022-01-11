@@ -1,16 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Redirect, Route } from "react-router";
 import PublicLayout from "../layout/publicLayout";
+import { useIsLoggedIn } from "hooks";
 
 const PublicWrapper = ({ component: Component, ...rest }) => {
-  const { isLogged } = useSelector((state) => state.app);
+  const isLoggedIn = useIsLoggedIn();
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLogged !== true ? (
+        isLoggedIn !== true ? (
           <PublicLayout {...props}>
             <Component {...props} />
           </PublicLayout>

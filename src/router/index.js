@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import { useSelector } from "react-redux";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { AuthContext } from "../auth/AuthContext";
 import { PrivateRoutes, PublicRoutes } from "./routes";
@@ -7,12 +6,13 @@ import Error404 from "pages/Error404";
 import AppLoader from "components/Loader/AppLoader";
 import PublicWrapper from "../hoc/PublicWrapper";
 import AuthWrapper from "../hoc/AuthWrapper";
+import { useIsLoggedIn } from "hooks";
 
 const Router = () => {
-  const { isLogged } = useSelector((state) => state.app);
+  const isLoggedIn = useIsLoggedIn();
 
   return (
-    <AuthContext.Provider value={isLogged}>
+    <AuthContext.Provider value={isLoggedIn}>
       <Suspense fallback={AppLoader} />
       <BrowserRouter>
         <Switch>
