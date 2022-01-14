@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Redirect } from "react-router";
-import { useSelector } from "react-redux";
+import { useIsLoggedIn } from "hooks";
 import PrivateLayout from "../layout/privateLayout";
 
 const AuthWrapper = ({ component: Component, ...rest }) => {
-  const { isLogged } = useSelector((state) => state.app);
+  const isLoggedIn = useIsLoggedIn();
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        isLogged === true ? (
+        isLoggedIn === true ? (
           <PrivateLayout {...props}>
             <Component {...props} />
           </PrivateLayout>

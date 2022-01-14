@@ -76,6 +76,12 @@ This boilerplate is created in the interest of developers to make the basic deve
  ┃ ┣ 📂hoc
  ┃ ┃ ┣ 📜AuthWrapper.js
  ┃ ┃ ┗ 📜PublicWrapper.js
+ ┃ ┣ 📂hooks
+ ┃ ┃ ┣ 📜index.js
+ ┃ ┃ ┣ 📜providers.js
+ ┃ ┃ ┣ 📜state.js
+ ┃ ┃ ┣ 📜utils.js
+ ┃ ┃ ┗ 📜web.js
  ┃ ┣ 📂layout
  ┃ ┃ ┣ 📜privateLayout.js
  ┃ ┃ ┗ 📜publicLayout.js
@@ -152,6 +158,7 @@ This boilerplate is created in the interest of developers to make the basic deve
 
 - All the url facing components should be placed in `pages` directory
 - All the sharable components should be placed inside `components` directory
+- All the custom hooks should be placed inside `hooks` directory under particular files based on the hooks nature. Like hooks that fetches redux state should be placed in `state.js`, context hooks under `providers.js` and any web/utils helpers under `web.js` & `utils.js` respectively.
 - Themes can be managed in `themes` directory
 - This boilerplate is already set with Material-UI v5. You need not to update anything.
 - This boilerplate is also set with Redux and authentication flow. So all the routing can be managed accordingly.
