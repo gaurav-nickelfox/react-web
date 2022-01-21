@@ -5,6 +5,7 @@ import AppRouter from "./router";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { defaultTheme } from "./themes/defaultTheme";
 import store, { persistor } from "redux/store";
+import "./styles/global.scss";
 
 /**
  * @description Check if browser is Safar
