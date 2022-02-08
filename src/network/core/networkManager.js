@@ -1,9 +1,9 @@
 // Higher Order Class to make all network calls
 import store from "redux/store";
-import { HTTP_METHODS } from "./HttpMethods";
-import { ServerConfig } from "./ServerConfig";
-import { Response } from "./ResponseParser";
-import { refreshToken } from "./TokenRefresher";
+import { HTTP_METHODS } from "./httpMethods";
+import { ServerConfig } from "./serverConfig";
+import { Response } from "./responseParser";
+import { refreshToken } from "./tokenRefresher";
 
 // ********************
 // Create a new instance of this Network class and make api call
