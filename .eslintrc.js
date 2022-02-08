@@ -13,7 +13,8 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-unsafe-finally": 0
   },
   settings: {
     "import/resolver": {
