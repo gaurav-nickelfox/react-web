@@ -42,7 +42,7 @@ export function TextEditor() {
               "undo redo | blocks | " +
               "bold italic forecolor | alignleft aligncenter " +
               "alignright alignjustify | bullist numlist outdent indent | " +
-              "removeformat | help | link image",
+              "removeformat | help | link image | table",
             content_style:
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
           }}
