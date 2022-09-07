@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { collection, addDoc } from "firebase/firestore";
 import { fireBaseConnectionInstance } from "helpers";
+import Button from "@mui/material/Button";
 
 export function TextEditor() {
   const editorRef = useRef(null);
@@ -59,7 +60,7 @@ export function TextEditor() {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
           }}
         />
-        <button onClick={publishBlog}>Log editor content</button>
+        <Button variant="contained" color="primary" onClick={publishBlog}>Publish Blog</Button>
       </div>
     </>
   );
