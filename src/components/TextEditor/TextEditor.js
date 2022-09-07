@@ -4,15 +4,16 @@ import { collection, addDoc } from "firebase/firestore";
 import { fireBaseConnectionInstance } from "helpers";
 import Button from "@mui/material/Button";
 
-export function TextEditor() {
+export function TextEditor(props) {
   const editorRef = useRef(null);
-
+  const {title} = props
   const publishBlog = async() => {
     const { db } = fireBaseConnectionInstance();
     if (editorRef.current) {
       const data = editorRef.current.getContent();
       try {
         const docRef = await addDoc(collection(db, "blogs"), {
+          Title:title,  
           Body: data
         });
         alert("Document written with ID: ", docRef.id);

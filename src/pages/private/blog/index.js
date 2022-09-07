@@ -19,6 +19,7 @@ function Bloglist() {
   //     arrPost.push({...doc.data(),key:doc.id})
   //  });
   //   }
+  
   useEffect(() => {
     const arrPost = [];
     const getBlogsCollectionData = async () => {
