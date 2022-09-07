@@ -3,17 +3,20 @@ import { Editor } from "@tinymce/tinymce-react";
 import { collection, addDoc } from "firebase/firestore";
 import { fireBaseConnectionInstance } from "helpers";
 import Button from "@mui/material/Button";
+import { useGetBlogEditorIntialValue } from "hooks";
 
 export function TextEditor(props) {
   const editorRef = useRef(null);
-  const {title} = props
-  const publishBlog = async() => {
+  const intialEditorValue = useGetBlogEditorIntialValue();
+  const { title } = props;
+  
+  const publishBlog = async () => {
     const { db } = fireBaseConnectionInstance();
     if (editorRef.current) {
       const data = editorRef.current.getContent();
       try {
         const docRef = await addDoc(collection(db, "blogs"), {
-          Title:title,  
+          Title: title,
           Body: data
         });
         alert("Document written with ID: ", docRef.id);
@@ -28,7 +31,7 @@ export function TextEditor(props) {
         <Editor
           apiKey="ogjzq7lo8j6i0zyghx5aywo8teuel8y56dblwh6cjnwyj8wh"
           onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue={`<p><a title="image_address" href="https://www.shutterstock.com/image-photo/aerial-view-floating-water-scooter-blue-1492736684">This is the new link that has been genearted&nbsp;</a></p>`}
+          initialValue={`${intialEditorValue}`}
           init={{
             height: 500,
             menubar: false,
@@ -61,7 +64,9 @@ export function TextEditor(props) {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
           }}
         />
-        <Button variant="contained" color="primary" onClick={publishBlog}>Publish Blog</Button>
+        <Button variant="contained" color="primary" onClick={publishBlog}>
+          Publish Blog
+        </Button>
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
+import {useHistory} from "react-router-dom"
 
 // const Blogs = db.collection('blogs');
 
@@ -11,6 +12,11 @@ function Bloglist() {
   const [blogslist, setblogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const { db } = fireBaseConnectionInstance();
+  const history = useHistory();
+
+  const navigateToDashboard=(route,blogId)=>{
+    history.push(route,blogId)
+  }
 
   //  const getBlogsCollectionData = async()=>{
   //  const { db } = fireBaseConnectionInstance();
@@ -34,7 +40,7 @@ function Bloglist() {
     return () => getBlogsCollectionData();
   }, []);
 
-  const DeleteBlog = (id) => {
+  const deleteBlog = (id) => {
     const docRef = doc(db, "blogs", id);
     deleteDoc(docRef)
       .then(() => {
@@ -85,14 +91,14 @@ function Bloglist() {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    DeleteBlog(blog.id);
+                    navigateToDashboard("./u/dashboard",blog.id);
                   }}>
                   Edit
                 </Button>
                 <Button
                   variant="contained"
                   onClick={() => {
-                    DeleteBlog(blog.id);
+                    deleteBlog(blog.id);
                   }}>
                   delete
                 </Button>
