@@ -1,11 +1,23 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { collection, addDoc } from "firebase/firestore";
+import { fireBaseConnectionInstance } from "helpers";
 
 export function TextEditor() {
   const editorRef = useRef(null);
-  const log = () => {
+
+  const publishBlog = async() => {
+    const { db } = fireBaseConnectionInstance();
     if (editorRef.current) {
-      console.log(editorRef.current.getContent());
+      const data = editorRef.current.getContent();
+      try {
+        const docRef = await addDoc(collection(db, "blogs"), {
+          Body: data
+        });
+        alert("Document written with ID: ", docRef.id);
+      } catch (e) {
+        alert("Error adding document: ", e);
+      }
     }
   };
   return (
@@ -47,7 +59,7 @@ export function TextEditor() {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
           }}
         />
-        <button onClick={log}>Log editor content</button>
+        <button onClick={publishBlog}>Log editor content</button>
       </div>
     </>
   );
