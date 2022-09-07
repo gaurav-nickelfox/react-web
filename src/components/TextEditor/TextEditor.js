@@ -4,12 +4,13 @@ import { collection, addDoc } from "firebase/firestore";
 import { fireBaseConnectionInstance } from "helpers";
 import Button from "@mui/material/Button";
 import { useGetBlogEditorIntialValue } from "hooks";
+import BlogDispatcher from "redux/dispatchers/blogDispatcher";
 
 export function TextEditor(props) {
   const editorRef = useRef(null);
   const intialEditorValue = useGetBlogEditorIntialValue();
   const { title } = props;
-  
+
   const publishBlog = async () => {
     const { db } = fireBaseConnectionInstance();
     if (editorRef.current) {
@@ -19,6 +20,7 @@ export function TextEditor(props) {
           Title: title,
           Body: data
         });
+        BlogDispatcher.resetEditorText()
         alert("Document written with ID: ", docRef.id);
       } catch (e) {
         alert("Error adding document: ", e);

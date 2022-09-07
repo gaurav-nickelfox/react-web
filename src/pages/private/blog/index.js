@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import {useHistory} from "react-router-dom"
+import BlogDispatcher from "redux/dispatchers/blogDispatcher";
 
 // const Blogs = db.collection('blogs');
 
@@ -15,7 +16,9 @@ function Bloglist() {
   const history = useHistory();
 
   const navigateToDashboard=(route,blogId)=>{
-    history.push(route,blogId)
+    const blogBodyText = blogslist.find(list=>list.id=== blogId)
+    BlogDispatcher.setEditorText({bodyText:blogBodyText.Body??''})
+    history.push(route)
   }
 
   //  const getBlogsCollectionData = async()=>{
@@ -91,7 +94,7 @@ function Bloglist() {
                 <Button
                   variant="contained"
                   onClick={() => {
-                    navigateToDashboard("./u/dashboard",blog.id);
+                    navigateToDashboard("/u/dashboard",blog.id);
                   }}>
                   Edit
                 </Button>
