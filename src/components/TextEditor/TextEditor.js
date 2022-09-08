@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import { useGetBlogsState } from "hooks";
 import BlogDispatcher from "redux/dispatchers/blogDispatcher";
 import { AppConstants } from "constants/AppConstants";
+import { toast } from 'react-toastify';
 
 export function TextEditor() {
   const editorRef = useRef(null);
@@ -17,14 +18,15 @@ export function TextEditor() {
     if (editorRef.current) {
       const data = editorRef.current.getContent();
       try {
-        const docRef = await addDoc(collection(db, "blogs"), {
+         await addDoc(collection(db, "blogs"), {
           Title: blogTitle,
           Body: data
         });
         BlogDispatcher.resetEditorState();
-        alert("Document written with ID: ", docRef.id);
-      } catch (e) {
-        alert("Error adding document: ", e);
+        toast("Published Successfully!",{type:'success'})
+      } catch (error) {
+        console.log(error)
+        alert("Error publishing blog: ", error);
       }
     }
   };
@@ -35,10 +37,11 @@ export function TextEditor() {
       updateDoc(docRef, { Title: blogTitle, Body: data })
         .then(() => {
           BlogDispatcher.resetEditorState();
-          alert("Blog has beeen Updated Successfully");
+          toast("Blog has beeen Updated Successfully!",{type:'success'})
         })
         .catch((err) => {
           console.log(err);
+          toast("Error updating the blog Please try again...",{type:'success'})
         });
     }
   };

@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import { useHistory } from "react-router-dom";
 import BlogDispatcher from "redux/dispatchers/blogDispatcher";
 import { AppConstants } from "constants/AppConstants";
+import { toast } from 'react-toastify';
 
 function Bloglist() {
   const [blogslist, setblogs] = useState([]);
@@ -45,10 +46,11 @@ function Bloglist() {
       .then(() => {
         const updatedBlogList = blogslist.filter((list) => list.id !== id);
         setblogs(updatedBlogList);
-        alert("Document successfully deleted!");
+        toast("Blog successfully deleted!",{type:'success'});
       })
       .catch((error) => {
-        console.error("Error removing document: ", error);
+        console.log(error);
+        toast("Error deleting Blog",{type:'error'});
       });
   };
 
