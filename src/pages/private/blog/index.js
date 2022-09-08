@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fireBaseConnectionInstance } from "helpers";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Button from "@mui/material/Button";
+import CardHeader from '@mui/material/CardHeader';
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useHistory } from "react-router-dom";
@@ -59,6 +60,7 @@ function Bloglist() {
       <h2>All blogs List</h2>
       {blogslist.map((blog) => (
         <Card style={{ margin: "20px" }} variant="outlined" key={blog.id}>
+          <CardHeader title ={`Blog Title : ${blog.Title}`}/>
           <CardContent>
             <div
               style={{
