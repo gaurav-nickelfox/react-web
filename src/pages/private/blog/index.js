@@ -36,7 +36,6 @@ function Bloglist() {
       setLoading(false);
     };
     getBlogsCollectionData();
-    return () => getBlogsCollectionData();
   }, []);
 
   const deleteBlog = (id) => {

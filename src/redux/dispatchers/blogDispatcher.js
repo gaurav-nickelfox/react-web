@@ -6,7 +6,6 @@ const BlogDispatcher = {
     Stores.dispatch({ type: Actions.SET_EDITOR_TEXT, data: data.bodyText });
   },
   setBlogDetails: (data) => {
-    console.log(data);
     Stores.dispatch({ type: Actions.SET_BLOG_DETAILS, data });
   },
   setBlogTitle: (data) => {

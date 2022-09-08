@@ -24,7 +24,6 @@ const BlogReducer = (state = initialState, action) => {
       };
     case Actions.SET_BLOG_DETAILS: {
       const { blogId, intialEditorValue, blogType, blogTitle } = action.data;
-      console.log(action.data);
       return {
         ...state,
         intialEditorValue,
