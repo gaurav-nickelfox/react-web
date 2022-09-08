@@ -25,22 +25,14 @@ function Bloglist() {
     history.push(route);
   };
 
-  //  const getBlogsCollectionData = async()=>{
-  //  const { db } = fireBaseConnectionInstance();
-  //  const querySnapshot = await getDocs(collection(db, "blogs"));
-  //   querySnapshot.forEach((doc) => {
-  //     arrPost.push({...doc.data(),key:doc.id})
-  //  });
-  //   }
-
   useEffect(() => {
-    const arrPost = [];
+    const blogsList = [];
     const getBlogsCollectionData = async () => {
       const querySnapshot = await getDocs(collection(db, "blogs"));
       querySnapshot.forEach((doc) => {
-        arrPost.push({ ...doc.data(), id: doc.id });
+        blogsList.push({ ...doc.data(), id: doc.id });
       });
-      setblogs(arrPost);
+      setblogs(blogsList);
       setLoading(false);
     };
     getBlogsCollectionData();
@@ -60,22 +52,6 @@ function Bloglist() {
       });
   };
 
-  //   useEffect(() => {
-  //     // Subscribe to query with onSnapshot
-  //     const unsubscribe = Blogs.limit(100).onSnapshot((querySnapshot) => {
-  //       // Get all documents from collection - with IDs
-  //       const data = querySnapshot.docs.map((doc) => ({
-  //         ...doc.data(),
-  //         id: doc.id
-  //       }));
-  //       console.log({data});
-  //       // Update state
-  //       setblogs(data);
-  //     });
-
-  //     // Detach listener
-  //     return unsubscribe;
-  //   }, []);
   if (loading) {
     return <h1>Loading firebase data content......</h1>;
   }
