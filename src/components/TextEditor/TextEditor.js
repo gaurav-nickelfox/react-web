@@ -50,7 +50,7 @@ export function TextEditor() {
           onInit={(evt, editor) => (editorRef.current = editor)}
           initialValue={`${intialEditorValue}`}
           init={{
-            height: 500,
+            height: 400,
             menubar: false,
             plugins: [
               "advlist",
