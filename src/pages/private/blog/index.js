@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import { fireBaseConnectionInstance } from "helpers";
 import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Button from "@mui/material/Button";
-import CardHeader from '@mui/material/CardHeader';
+import CardHeader from "@mui/material/CardHeader";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { useHistory } from "react-router-dom";
 import BlogDispatcher from "redux/dispatchers/blogDispatcher";
 import { AppConstants } from "constants/AppConstants";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 function Bloglist() {
   const [blogslist, setblogs] = useState([]);
@@ -46,23 +49,36 @@ function Bloglist() {
       .then(() => {
         const updatedBlogList = blogslist.filter((list) => list.id !== id);
         setblogs(updatedBlogList);
-        toast("Blog successfully deleted!",{type:'success'});
+        toast("Blog successfully deleted!", { type: "success" });
       })
       .catch((error) => {
         console.log(error);
-        toast("Error deleting Blog",{type:'error'});
+        toast("Error deleting Blog", { type: "error" });
       });
   };
 
   if (loading) {
-    return <h1>Loading firebase data content......</h1>;
+    return (
+      <Box
+        component="div"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        py={17}>
+        <CircularProgress />
+      </Box>
+    );
   }
   return (
     <div>
-      <h2>All blogs List</h2>
+      <Typography paddingLeft={3} variant="h2" component="h2">
+        All Blog List
+      </Typography>
       {blogslist.map((blog) => (
         <Card style={{ margin: "20px" }} variant="outlined" key={blog.id}>
-          <CardHeader title ={`Blog Title : ${blog.Title}`}/>
+          <CardHeader title={`Blog Title : ${blog.Title}`} />
           <CardContent>
             <div
               style={{
