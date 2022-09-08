@@ -1,17 +1,30 @@
-import React,{useState} from "react";
-import {TextEditor} from "../../../components"
-import TextField from '@mui/material/TextField';
+import React, { useEffect } from "react";
+import { TextEditor } from "../../../components";
+import TextField from "@mui/material/TextField";
+import BlogDispatcher from "redux/dispatchers/blogDispatcher";
+import { useGetBlogsState } from "hooks";
 
 function Dashboard() {
-  const [blogTitle,setBlogTitle] = useState('')
-  const handleChange = (event)=>{
-    setBlogTitle(event.target.value)
-  }
+  const { blogTitle } = useGetBlogsState();
+  const handleChange = (event) => {
+    BlogDispatcher.setBlogTitle(event.target.value);
+  };
+  useEffect(() => {
+    return () => BlogDispatcher.resetEditorState();
+  }, []);
+
   return (
     <div>
       <h1>Blog Dashboard</h1>
-      <TextField placeholder="Enter Blog Title" onChange={handleChange} id="outlined-basic" label="Title" variant="outlined"/>
-      <TextEditor title={blogTitle}/>
+      <TextField
+        value={blogTitle}
+        placeholder="Enter Blog Title"
+        onChange={handleChange}
+        id="outlined-basic"
+        label="Title"
+        variant="outlined"
+      />
+      <TextEditor />
     </div>
   );
 }

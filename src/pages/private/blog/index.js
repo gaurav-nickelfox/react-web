@@ -4,10 +4,9 @@ import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import BlogDispatcher from "redux/dispatchers/blogDispatcher";
-
-// const Blogs = db.collection('blogs');
+import { AppConstants } from "constants/AppConstants";
 
 function Bloglist() {
   const [blogslist, setblogs] = useState([]);
@@ -15,11 +14,16 @@ function Bloglist() {
   const { db } = fireBaseConnectionInstance();
   const history = useHistory();
 
-  const navigateToDashboard=(route,blogId)=>{
-    const blogBodyText = blogslist.find(list=>list.id=== blogId)
-    BlogDispatcher.setEditorText({bodyText:blogBodyText.Body??''})
-    history.push(route)
-  }
+  const navigateToDashboard = (route, blogId) => {
+    const { Body, Title } = blogslist.find((list) => list.id === blogId);
+    BlogDispatcher.setBlogDetails({
+      intialEditorValue: Body,
+      blogTitle: Title,
+      blogId,
+      blogType: AppConstants.UPDATE_BLOG
+    });
+    history.push(route);
+  };
 
   //  const getBlogsCollectionData = async()=>{
   //  const { db } = fireBaseConnectionInstance();
@@ -28,7 +32,7 @@ function Bloglist() {
   //     arrPost.push({...doc.data(),key:doc.id})
   //  });
   //   }
-  
+
   useEffect(() => {
     const arrPost = [];
     const getBlogsCollectionData = async () => {
@@ -72,7 +76,6 @@ function Bloglist() {
   //     // Detach listener
   //     return unsubscribe;
   //   }, []);
-  console.log(blogslist);
   if (loading) {
     return <h1>Loading firebase data content......</h1>;
   }
@@ -90,11 +93,16 @@ function Bloglist() {
               }}
               id={blog.id}>
               <div dangerouslySetInnerHTML={{ __html: blog.Body }}></div>
-              <div style={{ display: "flex", justifyContent: "space-between",minWidth:'15%' }}>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  minWidth: "15%"
+                }}>
                 <Button
                   variant="contained"
                   onClick={() => {
-                    navigateToDashboard("/u/dashboard",blog.id);
+                    navigateToDashboard("/u/dashboard", blog.id);
                   }}>
                   Edit
                 </Button>

@@ -1,11 +1,11 @@
 import Actions from "../actions/blogAction";
-import {AppConstants} from "../../constants/AppConstants"
-
+import { AppConstants } from "../../constants/AppConstants";
 
 let initialState = {
-  intialEditorValue : "<h1>This is the intial State</h1>",
-  blogTitle :'',
-  blogType: AppConstants.CREATE_BLOG
+  intialEditorValue: "",
+  blogType: AppConstants.CREATE_BLOG,
+  blogId: "",
+  blogTitle: ""
 };
 const BlogReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,11 +14,30 @@ const BlogReducer = (state = initialState, action) => {
         ...state,
         intialEditorValue: action.data
       };
-      case Actions.RESET_EDITOR:
-        return {
-          ...state,
-          intialEditorValue: ""
-        };
+    case Actions.RESET_EDITOR:
+      return {
+        ...state,
+        intialEditorValue: "",
+        blogId: "",
+        blogType: AppConstants.CREATE_BLOG,
+        blogTitle: ""
+      };
+    case Actions.SET_BLOG_DETAILS: {
+      const { blogId, intialEditorValue, blogType, blogTitle } = action.data;
+      console.log(action.data);
+      return {
+        ...state,
+        intialEditorValue,
+        blogId,
+        blogType,
+        blogTitle
+      };
+    }
+    case Actions.SET_BLOG_TITLE:
+      return {
+        ...state,
+        blogTitle: action.data
+      };
     default:
       return state;
   }
