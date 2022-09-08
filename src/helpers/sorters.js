@@ -16,7 +16,6 @@ function merge(left, right, compareFunc) {
   return resultArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function mergeSort(unsortedArray, compareFunc) {
   if (unsortedArray.length <= 1) {
     return unsortedArray;
