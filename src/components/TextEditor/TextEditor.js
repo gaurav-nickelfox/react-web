@@ -1,14 +1,16 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc,updateDoc,doc } from "firebase/firestore";
 import { fireBaseConnectionInstance } from "helpers";
 import Button from "@mui/material/Button";
-import { useGetBlogEditorIntialValue } from "hooks";
+import { useGetBlogsState } from "hooks";
 import BlogDispatcher from "redux/dispatchers/blogDispatcher";
+import { AppConstants } from "constants/AppConstants";
 
 export function TextEditor(props) {
   const editorRef = useRef(null);
-  const intialEditorValue = useGetBlogEditorIntialValue();
+  const {intialEditorValue,blogType,blogId} =  useGetBlogsState()
+  console.log(intialEditorValue,blogType,blogId)
   const { title } = props;
 
   const publishBlog = async () => {
@@ -27,6 +29,19 @@ export function TextEditor(props) {
       }
     }
   };
+  const updateBlog = async(docId)=>{
+  const docRef = doc('blogs',docId)
+  if(editorRef.current){
+  const data = editorRef.current.getContent();
+  updateDoc(docRef,{Title:title,Body:data}).then(()=>{
+    BlogDispatcher.resetEditorText()
+    alert("Blog has beeen Updated Successfully")
+  }).catch(err=>{
+    console.log(err)
+  })
+ }
+
+  }
   return (
     <>
       <div style={{ margin: "auto" }}>
@@ -66,7 +81,9 @@ export function TextEditor(props) {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
           }}
         />
-        <Button variant="contained" color="primary" onClick={publishBlog}>
+        <Button variant="contained" color="primary" onClick={()=>{
+          blogType===AppConstants.CREATE_BLOG?publishBlog():updateBlog(blogId)
+        }}>
           Publish Blog
         </Button>
       </div>

@@ -1,7 +1,11 @@
 import Actions from "../actions/blogAction";
+import {AppConstants} from "../../constants/AppConstants"
+
 
 let initialState = {
-  intialEditorValue : "<h1>This is the intial State</h1>"
+  intialEditorValue : "<h1>This is the intial State</h1>",
+  blogTitle :'',
+  blogType: AppConstants.CREATE_BLOG
 };
 const BlogReducer = (state = initialState, action) => {
   switch (action.type) {
