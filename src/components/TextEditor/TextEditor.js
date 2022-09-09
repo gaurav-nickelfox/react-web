@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { useGetBlogsState } from "hooks";
 import BlogDispatcher from "redux/dispatchers/blogDispatcher";
 import { AppConstants } from "constants/AppConstants";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export function TextEditor() {
   const editorRef = useRef(null);
@@ -18,14 +18,14 @@ export function TextEditor() {
     if (editorRef.current) {
       const data = editorRef.current.getContent();
       try {
-         await addDoc(collection(db, "blogs"), {
+        await addDoc(collection(db, "blogs"), {
           Title: blogTitle,
           Body: data
         });
         BlogDispatcher.resetEditorState();
-        toast("Published Successfully!",{type:'success'})
+        toast("Published Successfully!", { type: "success" });
       } catch (error) {
-        console.log(error)
+        console.log(error);
         alert("Error publishing blog: ", error);
       }
     }
@@ -37,11 +37,13 @@ export function TextEditor() {
       updateDoc(docRef, { Title: blogTitle, Body: data })
         .then(() => {
           BlogDispatcher.resetEditorState();
-          toast("Blog has beeen Updated Successfully!",{type:'success'})
+          toast("Blog has beeen Updated Successfully!", { type: "success" });
         })
         .catch((err) => {
           console.log(err);
-          toast("Error updating the blog Please try again...",{type:'success'})
+          toast("Error updating the blog Please try again...", {
+            type: "success"
+          });
         });
     }
   };
@@ -88,9 +90,9 @@ export function TextEditor() {
           variant="contained"
           color="primary"
           onClick={() => {
-            blogType === AppConstants.CREATE_BLOG
-              ? publishBlog()
-              : updateBlog(blogId);
+            blogType === AppConstants.UPDATE_BLOG
+              ? updateBlog(blogId)
+              : publishBlog();
           }}>
           Publish Blog
         </Button>

@@ -87,15 +87,18 @@ function Bloglist() {
                 alignItems: "center"
               }}
               id={blog.id}>
-              <div dangerouslySetInnerHTML={{ __html: blog.Body }}></div>
+              <div
+                style={{ alignSelf: "flex-start" }}
+                dangerouslySetInnerHTML={{ __html: blog.Body }}></div>
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  minWidth: "15%"
+                  alignSelf: "flex-end"
                 }}>
                 <Button
                   variant="contained"
+                  style={{ marginRight: "10px" }}
                   onClick={() => {
                     navigateToDashboard("/u/dashboard", blog.id);
                   }}>
