@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { collection, addDoc, updateDoc, doc } from "firebase/firestore";
 import { fireBaseConnectionInstance } from "helpers";
@@ -47,11 +47,14 @@ export function TextEditor() {
         });
     }
   };
+  useEffect(()=>{
+    console.log("component render")
+  })
   return (
     <>
       <div style={{ margin: "auto" }}>
         <Editor
-          apiKey="ogjzq7lo8j6i0zyghx5aywo8teuel8y56dblwh6cjnwyj8wh"
+          apiKey={process.env.EDITOR_API_KEY}
           onInit={(evt, editor) => (editorRef.current = editor)}
           initialValue={`${intialEditorValue}`}
           init={{

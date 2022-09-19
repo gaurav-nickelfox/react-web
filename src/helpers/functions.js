@@ -5,7 +5,7 @@ export const fireBaseConnectionInstance = () => {
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
   const firebaseConfig = {
-    apiKey: "AIzaSyCxLIxdey5iS_cpsCSOpLFtXeh1tU5qEUs",
+    apiKey: process.env.FIREABSE_API_KEY,
     authDomain: "blog-web-app-d451f.firebaseapp.com",
     projectId: "blog-web-app-d451f",
     storageBucket: "blog-web-app-d451f.appspot.com",
