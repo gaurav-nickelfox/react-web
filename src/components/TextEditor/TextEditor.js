@@ -52,7 +52,7 @@ export function TextEditor() {
   })
   return (
     <>
-      <div style={{ margin: "auto" }}>
+      <div style={{ margin: "10px 0px 10px 0px"}}>
         <Editor
           apiKey={process.env.EDITOR_API_KEY}
           onInit={(evt, editor) => (editorRef.current = editor)}
@@ -92,6 +92,7 @@ export function TextEditor() {
         <Button
           variant="contained"
           color="primary"
+          style={{marginTop:'10px'}}
           onClick={() => {
             blogType === AppConstants.UPDATE_BLOG
               ? updateBlog(blogId)

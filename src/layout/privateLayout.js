@@ -96,7 +96,7 @@ export default function PrivateLayout({ children }) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" noWrap component="div">
-            React Scaffolding
+            Blog Web
           </Typography>
         </Toolbar>
       </AppBar>

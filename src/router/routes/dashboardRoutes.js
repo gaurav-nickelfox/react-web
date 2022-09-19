@@ -14,7 +14,5 @@ class MenuPath {
 
 export const DashboardMenus = [
   new MenuPath("Dahboard", <HomeIcon />, "/u/dashboard"),
-  new MenuPath("Settings", <SettingsIcon />, "/u/settings"),
-  new MenuPath("Orders", <SettingsIcon />, "/u/orders"),
   new MenuPath("Blogs", <SettingsIcon />, "/u/blogs")
 ];

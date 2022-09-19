@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { TextEditor } from "../../../components";
+import { TextEditor } from "components/TextEditor/TextEditor";
 import TextField from "@mui/material/TextField";
 import BlogDispatcher from "redux/dispatchers/blogDispatcher";
 import { useGetBlogsState } from "hooks";
